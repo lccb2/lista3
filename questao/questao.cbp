@@ -32,7 +32,11 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="../../../sequencia.txt" />
+		<Unit filename="edooq.cpp" />
 		<Unit filename="main.cpp" />
+		<Unit filename="sequencia.txt" />
+		<Unit filename="sequencia1.txt" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>

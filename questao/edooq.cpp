@@ -5,25 +5,25 @@
 
 using namespace std;
 
-const int TAM_TABELA = 1009;  // Tamanho da tabela hash (número primo para menos colisões)
+const int TAM_TABELA = 1009;  // Tamanho da tabela hash (numero primo para menos colisoes)
 const int TAM_BLOCO = 6;  // Tamanho de cada bloco de caracteres
 
 // Estrutura para armazenar um bloco na hash table
 struct Nodo {
     string bloco;
     int contador;
-    Nodo* proximo;  // Ponteiro para tratar colisões (encadeamento)
+    Nodo* proximo;  // Ponteiro para tratar colisoes (encadeamento)
 
     Nodo(string b) : bloco(b), contador(1), proximo(nullptr) {}
 };
 
-// Classe da Tabela Hash com tratamento de colisões por encadeamento
+// Classe da Tabela Hash com tratamento de colisoes por encadeamento
 class TabelaHash {
 private:
     vector<Nodo*> tabela;
-    vector<string> ordemBlocos;  // Mantém a ordem dos blocos na inserção
+    vector<string> ordemBlocos;  // Mantém a ordem dos blocos na insercao
 
-    // Função hash para distribuir os blocos na tabela
+    // Funcao hash para distribuir os blocos na tabela
     int calcularHash(const string& bloco) {
         long hash = 0, p = 31, potencia = 1;
         for (char c : bloco) {
@@ -36,26 +36,26 @@ private:
 public:
     TabelaHash() : tabela(TAM_TABELA, nullptr) {}
 
-    // Insere um bloco na hash table ou incrementa a contagem se já existir
+    // Insere um bloco na hash table ou incrementa a contagem se ja existir
     void inserirBloco(const string& bloco) {
         int indice = calcularHash(bloco);
         Nodo* atual = tabela[indice];
 
-        // Verifica se o bloco já existe na lista encadeada da posição
+        // Verifica se o bloco ja existe na lista encadeada da posicao
         while (atual) {
             if (atual->bloco == bloco) {
-                atual->contador++;  // Se já existe, só aumenta o contador
+                atual->contador++;  // Se já existe, so aumenta o contador
                 return;
             }
             atual = atual->proximo;
         }
 
-        // Se não existe, cria um novo nodo e adiciona na tabela
+        // Se nao existe, cria um novo nodo e adiciona na tabela
         Nodo* novo = new Nodo(bloco);
         novo->proximo = tabela[indice];
         tabela[indice] = novo;
 
-        // Guarda a ordem de inserção para manter a sequência original
+        // Guarda a ordem de insercao para manter a sequencia original
         ordemBlocos.push_back(bloco);
     }
 
@@ -85,7 +85,7 @@ public:
         cout << "Arquivo '" << nomeArquivo << "' salvo com sucesso!\n";
     }
 
-    // Libera memória dos nodos alocados
+    // Libera memoria dos nodos alocados
     ~TabelaHash() {
         for (Nodo* head : tabela) {
             while (head) {
@@ -97,11 +97,11 @@ public:
     }
 };
 
-// Função principal
+// Funcao principal
 int main() {
-    ifstream entrada("sequencia1.txt");
+    ifstream entrada("sequencia.txt");
     if (!entrada.is_open()) {
-        cerr << "Erro ao abrir sequencia1.txt" << endl;
+        cerr << "Erro ao abrir sequencia.txt" << endl;
         return 1;
     }
 
@@ -113,7 +113,7 @@ int main() {
 
     TabelaHash tabela;
 
-    // Percorre a string pegando blocos de 6 caracteres (sem sobreposição)
+    // Percorre a string pegando blocos de 6 caracteres (sem sobreposicao)
     for (size_t i = 0; i + TAM_BLOCO <= sequencia.size(); i += TAM_BLOCO) {
         string bloco = sequencia.substr(i, TAM_BLOCO);
         tabela.inserirBloco(bloco);
