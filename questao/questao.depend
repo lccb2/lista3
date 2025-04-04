@@ -1,0 +1,9 @@
+# depslib dependency file v1.0
+1743730323 source:c:\users\acer\onedrive\documentos\documentos de lorena\federal\questao\edooq.cpp
+	<iostream>
+	<fstream>
+	<string>
+	<vector>
+
+1743728473 source:c:\users\acer\onedrive\documentos\documentos de lorena\federal\questao\main.cpp
+
